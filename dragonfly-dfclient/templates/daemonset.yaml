@@ -19,14 +19,11 @@ spec:
         app.kubernetes.io/name: {{ include "dragonfly-dfclient.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      hostNetwork: true
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
           volumeMounts:
           - name: {{ include "dragonfly-dfclient.name" . }}-cfg
             mountPath: /etc/dragonfly.conf
