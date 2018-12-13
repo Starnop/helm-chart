@@ -26,6 +26,10 @@ configFiles:
     [node]
     address=127.0.0.1
 
+# custom args used to override default image entrypoint.
+dfdaemonArgs:
+  # registry: https://index.docker.io
+
 ingress:
   enabled: false
   annotations: {}

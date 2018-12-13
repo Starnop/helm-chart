@@ -23,6 +23,10 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+          {{- range $key, $value := .Values.dfdaemonArgs }}
+            - {{ printf "--%s=%s" $key $value | quote}}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
