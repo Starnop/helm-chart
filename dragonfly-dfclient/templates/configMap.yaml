@@ -9,7 +9,4 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
-{{- range $key, $val := .Values.configFiles }}
-  {{ $key }}: |-
-{{ $val | indent 4}}
-{{- end }}
+  {{- (.Files.Glob "config/*").AsConfig | nindent 2 }}
